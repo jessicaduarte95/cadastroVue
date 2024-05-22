@@ -7,8 +7,7 @@
 					<InputComponent label="Nome" />
 					<InputComponent label="E-mail" />
 				</div>
-				<div id="containerButton">
-				</div>
+				<div id="containerButton"></div>
 			</div>
 		</div>
 	</div>
@@ -50,12 +49,12 @@ export default class App extends Vue {}
 
 #search {
 	display: flex;
-	background-color: #EEEEEE;
+	background-color: #eeeeee;
 	border-radius: 4px;
 	padding: 20px;
-	margin-Top: 2rem;
+	margin-top: 2rem;
 	height: 8rem;
-	flexDirection: column
+	flexdirection: column;
 }
 
 #containerInput {
