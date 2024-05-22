@@ -47,7 +47,10 @@ export default class App extends Vue {
 	}
 }
 .fields {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
+	gap: 0.8rem;
 }
 .button {
 	display: flex;
