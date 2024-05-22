@@ -7,7 +7,10 @@
 					<InputComponent label="Nome" />
 					<InputComponent label="E-mail" />
 				</div>
-				<div id="containerButton"></div>
+				<div id="containerButton">
+					<ButtonComponent children="Cadastrar" />
+					<ButtonComponent children="Pesquisar" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -17,11 +20,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HeaderComponent from './components/HeaderComponent.vue';
 import InputComponent from './components/InputComponent.vue';
+import ButtonComponent from './components/ButtonComponent.vue';
 
 @Component({
 	components: {
 		HeaderComponent,
-		InputComponent
+		InputComponent,
+		ButtonComponent
 	}
 })
 export default class App extends Vue {}
@@ -53,13 +58,26 @@ export default class App extends Vue {}
 	border-radius: 4px;
 	padding: 20px;
 	margin-top: 2rem;
-	height: 8rem;
-	flexdirection: column;
+	height: 7rem;
+	flex-direction: column;
+	@media (max-width: 600px) {
+		height: 12rem;
+	}
 }
 
 #containerInput {
 	display: flex;
 	flex-direction: row;
 	gap: 1rem;
+	@media (max-width: 600px) {
+		flex-direction: column;
+	}
+}
+
+#containerButton {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+	gap: 0.5rem;
 }
 </style>

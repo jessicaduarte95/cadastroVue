@@ -28,5 +28,8 @@ export default {
 	font-size: 3rem;
 	font-weight: bold;
 	color: #ffffff;
+	@media (max-width: 600px) {
+		font-size: 1.8rem;
+	}
 }
 </style>
