@@ -1,9 +1,18 @@
 <template>
 	<div v-if="visible">
 		<ModalComponent>
-			<div>
-				<h2>Cadastrar Pessoa</h2>
-				<button class="close-button" @click="closeModalCadastro">x</button>
+			<div class="modal-container">
+				<div>
+					<h2>Cadastrar Pessoa</h2>
+					<button class="close-button" @click="closeModalCadastro">x</button>
+				</div>
+				<div class="fields">
+					<InputComponent label="Nome" />
+					<InputComponent label="E-mail" />
+				</div>
+				<div class="button">
+					<ButtonComponent children="Salvar" type="submit" />
+				</div>
 			</div>
 		</ModalComponent>
 	</div>
@@ -12,10 +21,14 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ModalComponent from '../components/ModalComponent.vue';
+import InputComponent from '../components/InputComponent.vue';
+import ButtonComponent from '../components/ButtonComponent.vue';
 
 @Component({
 	components: {
-		ModalComponent
+		ModalComponent,
+		InputComponent,
+		ButtonComponent
 	}
 })
 export default class App extends Vue {
@@ -27,6 +40,20 @@ export default class App extends Vue {
 </script>
 
 <style>
+.modal-container {
+	width: 25rem;
+	@media (max-width: 600px) {
+		width: 15rem;
+	}
+}
+.fields {
+	width: 100%;
+}
+.button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.7rem;
+}
 .close-button {
 	position: absolute;
 	top: 10px;

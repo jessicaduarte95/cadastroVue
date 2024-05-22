@@ -29,7 +29,6 @@ export default {
 	padding: 0.5rem;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	width: 15rem;
 	&:focus {
 		outline: 0.5px solid #4791db;
 		border-color: #4791db;

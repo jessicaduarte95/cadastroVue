@@ -89,9 +89,11 @@ export default class App extends Vue {
 	padding: 20px;
 	margin-top: 2rem;
 	height: 7rem;
+    width: 35rem;
 	flex-direction: column;
 	@media (max-width: 600px) {
 		height: 12rem;
+        width: 17rem;
 	}
 }
 
