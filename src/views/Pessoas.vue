@@ -11,8 +11,10 @@
 					<div id="containerButton">
 						<ButtonComponent children="Cadastrar" />
 						<ButtonComponent children="Pesquisar" type="submit" />
+						<button @click="openModalCadastro">Open Modal</button>
 					</div>
 				</div>
+				<ModalCadastrarPessoa :visible="visibleModalCadastro" />
 			</form>
 		</div>
 	</div>
@@ -21,25 +23,29 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
+import { ref } from 'vue';
 import HeaderComponent from '../components/HeaderComponent.vue';
 import InputComponent from '../components/InputComponent.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
+import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
 
 @Component({
 	components: {
 		HeaderComponent,
 		InputComponent,
-		ButtonComponent
+		ButtonComponent,
+		ModalCadastrarPessoa
 	}
 })
 export default class App extends Vue {
-	data: any = null;
+	result: any = null;
 	error: string | null = null;
+	visibleModalCadastro: boolean = false;
 
 	async fetchData() {
 		try {
 			const response = await axios.get('http://localhost:5000/api/pessoa');
-			this.data = response.data;
+			this.result = response.data;
 		} catch (error) {
 			this.error = 'Erro ao buscar dados: ' + error;
 		}
@@ -48,6 +54,11 @@ export default class App extends Vue {
 	async handleSubmit(event: Event) {
 		event.preventDefault();
 		await this.fetchData();
+	}
+
+	async openModalCadastro() {
+		this.visibleModalCadastro = true;
+		console.log(this.visibleModalCadastro);
 	}
 }
 </script>
