@@ -10,8 +10,7 @@
 					</div>
 					<div id="containerButton">
 						<ButtonComponent children="Cadastrar" />
-						<ButtonComponent children="Pesquisar" />
-						<button type="submit" />
+						<ButtonComponent children="Pesquisar" type="submit" />
 					</div>
 				</div>
 			</form>
