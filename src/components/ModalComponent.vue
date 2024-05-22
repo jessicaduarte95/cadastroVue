@@ -1,7 +1,6 @@
 <template>
 	<div class="modal-overlay">
 		<div class="modal-content">
-			<button class="close-button">X</button>
 			<slot></slot>
 		</div>
 	</div>
@@ -32,14 +31,5 @@ export default defineComponent({
 	padding: 20px;
 	border-radius: 5px;
 	position: relative;
-}
-.close-button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	background: transparent;
-	border: none;
-	font-size: 20px;
-	cursor: pointer;
 }
 </style>

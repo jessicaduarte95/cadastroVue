@@ -9,9 +9,8 @@
 						<InputComponent label="E-mail" />
 					</div>
 					<div id="containerButton">
-						<ButtonComponent children="Cadastrar" />
+						<ButtonComponent children="Cadastrar" @click="openModalCadastro" />
 						<ButtonComponent children="Pesquisar" type="submit" />
-						<button @click="openModalCadastro">Open Modal</button>
 					</div>
 				</div>
 				<ModalCadastrarPessoa :visible="visibleModalCadastro" />

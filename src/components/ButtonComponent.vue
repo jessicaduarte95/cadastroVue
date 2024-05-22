@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button>{{ children }}</button>
+		<button @click="$emit('click')">{{ children }}</button>
 	</div>
 </template>
 
@@ -22,7 +22,7 @@ button {
 	color: #ffffff;
 	&:active {
 		border: none;
-		background-color: #1567B9;
+		background-color: #1567b9;
 	}
 }
 </style>

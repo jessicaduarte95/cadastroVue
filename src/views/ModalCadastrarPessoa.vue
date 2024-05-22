@@ -1,7 +1,10 @@
 <template>
 	<div v-if="visible">
 		<ModalComponent>
-			<h2>Cadastrar Pessoa</h2>
+			<div>
+				<h2>Cadastrar Pessoa</h2>
+				<button class="close-button" @click="closeModalCadastro">x</button>
+			</div>
 		</ModalComponent>
 	</div>
 </template>
@@ -18,7 +21,19 @@ import ModalComponent from '../components/ModalComponent.vue';
 export default class App extends Vue {
 	name = 'ModalCadastrarPessoa';
 	@Prop() visible!: boolean;
+
+	async closeModalCadastro() {}
 }
 </script>
 
-<style></style>
+<style>
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: transparent;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+</style>
