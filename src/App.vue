@@ -2,22 +2,26 @@
 	<div id="app">
 		<HeaderComponent msg="Cadastro de Pessoas" />
 		<div id="container">
-			<div id="search">
-				<div id="containerInput">
-					<InputComponent label="Nome" />
-					<InputComponent label="E-mail" />
+			<form @submit="handleSubmit">
+				<div id="search">
+					<div id="containerInput">
+						<InputComponent label="Nome" />
+						<InputComponent label="E-mail" />
+					</div>
+					<div id="containerButton">
+						<ButtonComponent children="Cadastrar" />
+						<ButtonComponent children="Pesquisar" />
+						<button type="submit" />
+					</div>
 				</div>
-				<div id="containerButton">
-					<ButtonComponent children="Cadastrar" />
-					<ButtonComponent children="Pesquisar" />
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import axios from 'axios';
 import HeaderComponent from './components/HeaderComponent.vue';
 import InputComponent from './components/InputComponent.vue';
 import ButtonComponent from './components/ButtonComponent.vue';
@@ -29,7 +33,24 @@ import ButtonComponent from './components/ButtonComponent.vue';
 		ButtonComponent
 	}
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+	data: any = null;
+	error: string | null = null;
+
+	async fetchData() {
+		try {
+			const response = await axios.get('http://localhost:5000/api/pessoa');
+			this.data = response.data;
+		} catch (error) {
+			this.error = 'Erro ao buscar dados: ' + error;
+		}
+	}
+
+	async handleSubmit(event: Event) {
+		event.preventDefault();
+		await this.fetchData();
+	}
+}
 </script>
 
 <style>
