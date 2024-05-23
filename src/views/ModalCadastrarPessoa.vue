@@ -52,7 +52,10 @@ const submitForm = async (event: Event) => {
 			.catch(error => {
 				console.log('Teste', error);
 			})
-			.finally(() => formV$.value.$reset());
+			.finally(() => {
+				form.value.nome = '';
+				form.value.email = '';
+			});
 	} else {
 		error = true;
 	}
