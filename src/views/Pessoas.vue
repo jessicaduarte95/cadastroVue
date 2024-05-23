@@ -1,66 +1,90 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { required } from '@vuelidate/validators';
+import useVuelidate from '@vuelidate/core';
+import axios from 'axios';
+import ButtonComponent from '../components/ButtonComponent.vue';
+import InputComponent from '../components/InputComponent.vue';
+import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
+
+type Form = {
+	id: number | null;
+	nome: string;
+	email: string;
+};
+
+const form = ref<Form>({
+	id: null,
+	nome: '',
+	email: ''
+});
+
+const rules = {
+	id: {},
+	nome: {},
+	email: {}
+};
+
+const visibleModalCadastro = ref<boolean>(false);
+
+const openModalCadastro = () => {
+	visibleModalCadastro.value = true;
+};
+
+const closeModalCadastro = () => {
+	visibleModalCadastro.value = false;
+};
+
+let v$ = useVuelidate(rules, form);
+
+const submitForm = async (event: Event) => {
+	event.preventDefault();
+	await axios
+		.get<Form>('http://localhost:5000/api/pessoa', {
+			params: {
+				nome: form.value.nome,
+				email: form.value.email
+			}
+		})
+		.then(response => {
+			console.log('Teste', response.data);
+		})
+		.catch(error => {
+			console.log('Teste', error);
+		});
+};
+</script>
+
 <template>
 	<div id="app">
-		<HeaderComponent msg="Cadastro de Pessoas" />
+		<div>
+			<div class="headerContainer">
+				<p class="title">Cadastro de Pessoas</p>
+			</div>
+		</div>
 		<div id="container">
-			<form @submit="handleSubmit">
-				<div id="search">
-					<div id="containerInput">
-						<InputComponent label="Nome" />
-						<InputComponent label="E-mail" />
+			<form @submit="submitForm">
+				<div class="search">
+					<div class="containerInput">
+						<div class="inputFields">
+							<label class="label">Nome</label>
+							<input class="input" placeholder="Digite aqui" v-model="form.nome" />
+						</div>
+						<div class="inputFields">
+							<label class="label">Email</label>
+							<input class="input" placeholder="Digite aqui" v-model="form.email" />
+						</div>
 					</div>
-					<div id="containerButton">
+					<div class="containerButton">
 						<ButtonComponent children="Cadastrar" @click="openModalCadastro" />
-						<ButtonComponent children="Pesquisar" type="submit" />
+						<ButtonComponent type="submit" children="Pesquisar" />
 					</div>
 				</div>
-				<ModalCadastrarPessoa :visible="visibleModalCadastro" />
 			</form>
+			<ModalCadastrarPessoa :visible="visibleModalCadastro" />
 		</div>
 	</div>
 </template>
-
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import axios from 'axios';
-import { ref } from 'vue';
-import HeaderComponent from '../components/HeaderComponent.vue';
-import InputComponent from '../components/InputComponent.vue';
-import ButtonComponent from '../components/ButtonComponent.vue';
-import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
-
-@Component({
-	components: {
-		HeaderComponent,
-		InputComponent,
-		ButtonComponent,
-		ModalCadastrarPessoa
-	}
-})
-export default class App extends Vue {
-	result: any = null;
-	error: string | null = null;
-	visibleModalCadastro: boolean = false;
-
-	async fetchData() {
-		try {
-			const response = await axios.get('http://localhost:5000/api/pessoa');
-			this.result = response.data;
-		} catch (error) {
-			this.error = 'Erro ao buscar dados: ' + error;
-		}
-	}
-
-	async handleSubmit(event: Event) {
-		event.preventDefault();
-		await this.fetchData();
-	}
-
-	async openModalCadastro() {
-		this.visibleModalCadastro = true;
-		console.log(this.visibleModalCadastro);
-	}
-}
-</script>
 
 <style>
 #app {
@@ -74,6 +98,25 @@ export default class App extends Vue {
 	padding: 0;
 }
 
+.headerContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	width: 100%;
+	height: 10rem;
+	background-image: linear-gradient(90deg, #115293 20%, #4791db 80%);
+}
+
+.title {
+	font-size: 3rem;
+	font-weight: bold;
+	color: #ffffff;
+	@media (max-width: 600px) {
+		font-size: 1.8rem;
+	}
+}
+
 #container {
 	display: flex;
 	justify-content: center;
@@ -82,22 +125,22 @@ export default class App extends Vue {
 	background-color: #f7f7f7;
 }
 
-#search {
+.search {
 	display: flex;
 	background-color: #eeeeee;
 	border-radius: 4px;
 	padding: 20px;
 	margin-top: 2rem;
 	height: 7rem;
-    width: 35rem;
+	width: 35rem;
 	flex-direction: column;
 	@media (max-width: 600px) {
 		height: 12rem;
-        width: 17rem;
+		width: 17rem;
 	}
 }
 
-#containerInput {
+.containerInput {
 	display: flex;
 	flex-direction: row;
 	gap: 1rem;
@@ -106,7 +149,24 @@ export default class App extends Vue {
 	}
 }
 
-#containerButton {
+.inputFields {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.label {
+	display: flex;
+}
+
+.input {
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.containerButton {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 1.5rem;

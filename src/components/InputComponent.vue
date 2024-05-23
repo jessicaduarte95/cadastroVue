@@ -30,9 +30,9 @@ export default {
 	padding: 0.5rem;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	&:focus {
+	/* &:focus {
 		outline: 0.5px solid #4791db;
 		border-color: #4791db;
-	}
+	} */
 }
 </style>

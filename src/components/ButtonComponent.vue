@@ -20,9 +20,9 @@ button {
 	border: none;
 	border-radius: 5px;
 	color: #ffffff;
-	&:active {
+	/* &:active {
 		border: none;
 		background-color: #1567b9;
-	}
+	} */
 }
 </style>
