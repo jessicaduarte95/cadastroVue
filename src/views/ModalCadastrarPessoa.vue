@@ -9,6 +9,7 @@ import useVuelidate from '@vuelidate/core';
 
 type TabProps = {
 	visible?: boolean;
+	closeModalCadastro: () => void;
 };
 
 const props = defineProps<TabProps>();
@@ -55,9 +56,11 @@ const submitForm = async (event: Event) => {
 			.finally(() => {
 				form.value.nome = '';
 				form.value.email = '';
+				props.closeModalCadastro();
 			});
 	} else {
 		error = true;
+		// alert('Campos Obrigatórios')
 	}
 };
 </script>

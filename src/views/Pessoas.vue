@@ -81,7 +81,7 @@ const submitForm = async (event: Event) => {
 					</div>
 				</div>
 			</form>
-			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro"/>
+			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro"/>
 		</div>
 	</div>
 </template>
