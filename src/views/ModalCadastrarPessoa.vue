@@ -4,7 +4,7 @@ import ButtonComponent from '../components/ButtonComponent.vue';
 import { defineProps } from 'vue';
 import axios from 'axios';
 import { ref } from 'vue';
-import { required } from '@vuelidate/validators';
+import { required, email } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 
 type TabProps = {
@@ -25,19 +25,37 @@ const form = ref<Form>({
 	email: ''
 });
 
+const rules = {
+	id: {},
+	nome: { required },
+	email: { required, email }
+};
+
+let formV$ = useVuelidate(rules, form);
+
+let error: boolean = false;
+
 const submitForm = async (event: Event) => {
 	event.preventDefault();
-	await axios
-		.post<Form>('http://localhost:5000/api/pessoa', {
-			nome: form.value.nome,
-			email: form.value.email
-		})
-		.then(response => {
-			console.log('Teste', response.data);
-		})
-		.catch(error => {
-			console.log('Teste', error);
-		});
+	await formV$.value.$touch();
+
+	const result = await formV$.value.$validate();
+	if (result) {
+		await axios
+			.post<Form>('http://localhost:5000/api/pessoa', {
+				nome: form.value.nome,
+				email: form.value.email
+			})
+			.then(response => {
+				console.log('Teste', response.data);
+			})
+			.catch(error => {
+				console.log('Teste', error);
+			})
+			.finally(() => formV$.value.$reset());
+	} else {
+		error = true;
+	}
 };
 </script>
 
@@ -48,16 +66,16 @@ const submitForm = async (event: Event) => {
 				<div class="modal-container">
 					<div>
 						<h2>Cadastrar Pessoa</h2>
-						<button class="close-button">x</button>
+						<button class="close-button" @click="$emit('close-modal')">x</button>
 					</div>
 					<div class="containerInputRegister">
 						<div class="inputFields">
 							<label class="label">Nome</label>
-							<input class="input" placeholder="Digite aqui" v-model="form.nome" />
+							<input class="input" placeholder="Digite aqui" v-model="form.nome" type="text" />
 						</div>
 						<div class="inputFields">
 							<label class="label">Email</label>
-							<input class="input" placeholder="Digite aqui" v-model="form.email" />
+							<input class="input" placeholder="Digite aqui" v-model="form.email" type="email" />
 						</div>
 					</div>
 					<div class="button">
@@ -100,6 +118,12 @@ const submitForm = async (event: Event) => {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
+
+.input:focus {
+	outline: 0.5px solid #4791db;
+	border-color: #4791db;
+}
+
 .button {
 	display: flex;
 	justify-content: flex-end;

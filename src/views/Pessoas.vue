@@ -47,7 +47,7 @@ const submitForm = async (event: Event) => {
 			}
 		})
 		.then(response => {
-			console.log('Teste', response.data);
+			console.log('Dados', response.data);
 		})
 		.catch(error => {
 			console.log('Teste', error);
@@ -81,7 +81,7 @@ const submitForm = async (event: Event) => {
 					</div>
 				</div>
 			</form>
-			<ModalCadastrarPessoa :visible="visibleModalCadastro" />
+			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro"/>
 		</div>
 	</div>
 </template>
