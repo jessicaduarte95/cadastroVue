@@ -25,7 +25,7 @@ export default {
 		ModalComponent,
 		ButtonComponent
 	},
-	setup(props) {
+	setup(props: any) {
 		type Form = {
 			id: number | null;
 			nome: string;
