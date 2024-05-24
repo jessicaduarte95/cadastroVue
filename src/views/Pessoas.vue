@@ -1,81 +1,102 @@
-<script setup lang="ts">
+<script lang="ts">
 import { ref } from 'vue';
-import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import axios from 'axios';
 import ButtonComponent from '../components/ButtonComponent.vue';
 import TableComponent from '../components/TableComponent.vue';
 import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
 
-type Form = {
-	_id: any;
-	nome: string;
-	email: string;
-};
+export default {
+	name: 'Pessoas',
+	components: {
+		ButtonComponent,
+		TableComponent,
+		ModalCadastrarPessoa
+	},
+	setup() {
+		type Form = {
+			_id: any;
+			nome: string;
+			email: string;
+		};
 
-const form = ref<Form>({
-	_id: null,
-	nome: '',
-	email: ''
-});
-
-const rules = {
-	_id: {},
-	nome: {},
-	email: {}
-};
-
-const visibleModalCadastro = ref<boolean>(false);
-
-const openModalCadastro = () => {
-	visibleModalCadastro.value = true;
-};
-
-const closeModalCadastro = () => {
-	visibleModalCadastro.value = false;
-};
-
-let v$ = useVuelidate(rules, form);
-
-const columns = {
-	nome: 'Nome',
-	email: 'E-mail',
-	excluir: 'Excluir'
-};
-
-let listPerson = ref<Form[]>([]);
-
-const addPersonList = (data: any) => {
-	listPerson.value.push(data);
-};
-
-const deletePerson = async (id: number) => {
-	await axios
-		.delete<Form[]>(`http://localhost:5000/api/pessoa/${id}`)
-		.then(response => {
-			const filteredList = listPerson.value.filter(e => e._id !== id);
-			listPerson.value = filteredList;
-		})
-		.catch(error => {
-			console.log('Teste', error);
+		const form = ref<Form>({
+			_id: null,
+			nome: '',
+			email: ''
 		});
-};
 
-const submitForm = async (event: Event) => {
-	event.preventDefault();
-	await axios
-		.get<Form[]>('http://localhost:5000/api/pessoa', {
-			params: {
-				nome: form.value.nome,
-				email: form.value.email
-			}
-		})
-		.then(response => {
-			listPerson.value = response.data;
-		})
-		.catch(error => {
-			console.log('Teste', error);
-		});
+		const rules = {
+			_id: {},
+			nome: {},
+			email: {}
+		};
+
+		const v$ = useVuelidate(rules, form);
+		const visibleModalCadastro = ref<boolean>(false);
+
+		const openModalCadastro = () => {
+			visibleModalCadastro.value = true;
+		};
+
+		const closeModalCadastro = () => {
+			visibleModalCadastro.value = false;
+		};
+
+		const columns = {
+			nome: 'Nome',
+			email: 'E-mail',
+			excluir: 'Excluir'
+		};
+
+		const listPerson = ref<Form[]>([]);
+
+		const addPersonList = (data: any) => {
+			listPerson.value.push(data);
+		};
+
+		const deletePerson = async (id: number) => {
+			await axios
+				.delete<Form[]>(`http://localhost:5000/api/pessoa/${id}`)
+				.then(response => {
+					const filteredList = listPerson.value.filter(e => e._id !== id);
+					listPerson.value = filteredList;
+				})
+				.catch(error => {
+					console.log('Teste', error);
+				});
+		};
+
+		const submitForm = async (event: Event) => {
+			event.preventDefault();
+			await axios
+				.get<Form[]>('http://localhost:5000/api/pessoa', {
+					params: {
+						nome: form.value.nome,
+						email: form.value.email
+					}
+				})
+				.then(response => {
+					listPerson.value = response.data;
+				})
+				.catch(error => {
+					console.log('Teste', error);
+				});
+		};
+
+		return {
+			v$,
+			form,
+			visibleModalCadastro,
+			openModalCadastro,
+			closeModalCadastro,
+			columns,
+			listPerson,
+			addPersonList,
+			deletePerson,
+			submitForm
+		};
+	}
 };
 </script>
 
