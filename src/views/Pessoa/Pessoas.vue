@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import axios from 'axios';
-import ButtonComponent from '../components/ButtonComponent.vue';
-import TableComponent from '../components/TableComponent.vue';
-import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
+import ButtonComponent from '../../components/ButtonComponent.vue';
+import TableComponent from '../../components/TableComponent.vue';
+import ModalCadastrarPessoa from './Modais/ModalCadastrarPessoa.vue';
 
 export default {
 	name: 'Pessoas',

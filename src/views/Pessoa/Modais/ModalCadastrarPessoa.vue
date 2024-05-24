@@ -1,7 +1,7 @@
 <script lang="ts">
 import { PropType } from 'vue';
-import ModalComponent from '../components/ModalComponent.vue';
-import ButtonComponent from '../components/ButtonComponent.vue';
+import ModalComponent from '../../../components/ModalComponent.vue';
+import ButtonComponent from '../../../components/ButtonComponent.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { required, email } from '@vuelidate/validators';
