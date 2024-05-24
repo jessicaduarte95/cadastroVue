@@ -1,75 +1,90 @@
-<script setup lang="ts">
+<script lang="ts">
+import { PropType } from 'vue';
 import ModalComponent from '../components/ModalComponent.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
-import { defineProps } from 'vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { required, email } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 
-type TabProps = {
-	visible?: boolean;
-	closeModalCadastro: () => void;
-	addPersonList: any;
-};
+export default {
+	name: 'ModalCadastrarPessoa',
+	props: {
+		visible: {
+			type: Boolean,
+			default: false
+		},
+		closeModalCadastro: {
+			type: Function as PropType<any>
+		},
+		addPersonList: {
+			type: Function as PropType<any>
+		}
+	},
+	components: {
+		ModalComponent,
+		ButtonComponent
+	},
+	setup(props) {
+		type Form = {
+			id: number | null;
+			nome: string;
+			email: string;
+		};
 
-const props = defineProps<TabProps>();
+		const form = ref<Form>({
+			id: null,
+			nome: '',
+			email: ''
+		});
 
-type Form = {
-	id: number | null;
-	nome: string;
-	email: string;
-};
+		const rules = {
+			id: {},
+			nome: { required },
+			email: { required, email }
+		};
 
-const form = ref<Form>({
-	id: null,
-	nome: '',
-	email: ''
-});
+		const formV$ = useVuelidate(rules, form);
 
-const rules = {
-	id: {},
-	nome: { required },
-	email: { required, email }
-};
+		const submitFormRegister = async (event: Event) => {
+			event.preventDefault();
+			await formV$.value.$touch();
 
-let formV$ = useVuelidate(rules, form);
-
-let error: boolean = false;
-
-const submitForm = async (event: Event) => {
-	event.preventDefault();
-	await formV$.value.$touch();
-
-	const result = await formV$.value.$validate();
-	if (result) {
-		await axios
-			.post<Form>('http://localhost:5000/api/pessoa', {
-				nome: form.value.nome,
-				email: form.value.email
-			})
-			.then(response => {
-				props.addPersonList(response.data);
-			})
-			.catch(error => {
-				console.log('Teste', error);
-			})
-			.finally(() => {
-				form.value.nome = '';
-				form.value.email = '';
-				props.closeModalCadastro();
-			});
-	} else {
-		error = true;
-		// alert('Campos Obrigatórios')
+			const result = await formV$.value.$validate();
+			if (result) {
+				await axios
+					.post<Form>('http://localhost:5000/api/pessoa', {
+						nome: form.value.nome,
+						email: form.value.email
+					})
+					.then(response => {
+						props.addPersonList(response.data);
+					})
+					.catch(error => {
+						console.log('Teste', error);
+					})
+					.finally(() => {
+						form.value.nome = '';
+						form.value.email = '';
+						props.closeModalCadastro();
+					});
+			} else {
+				// alert('Campos Obrigatórios')
+			}
+		};
+		return {
+			formV$,
+			form,
+			submitFormRegister
+		};
 	}
 };
 </script>
 
 <template>
-	<div v-if="props.visible">
+	<div v-if="visible">
 		<ModalComponent>
-			<form @submit="submitForm">
+			<form @submit="submitFormRegister">
 				<div class="modal-container">
 					<div>
 						<h2>Cadastrar Pessoa</h2>
