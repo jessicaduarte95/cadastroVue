@@ -5,13 +5,15 @@ import axios from 'axios';
 import ButtonComponent from '../../components/ButtonComponent.vue';
 import TableComponent from '../../components/TableComponent.vue';
 import ModalCadastrarPessoa from './Modais/ModalCadastrarPessoa.vue';
+import ModalEditarPessoa from './Modais/ModalEditarPessoa.vue';
 
 export default {
 	name: 'Pessoas',
 	components: {
 		ButtonComponent,
 		TableComponent,
-		ModalCadastrarPessoa
+		ModalCadastrarPessoa,
+		ModalEditarPessoa
 	},
 	setup() {
 		type Form = {
@@ -43,10 +45,32 @@ export default {
 			visibleModalCadastro.value = false;
 		};
 
+		const visibleModalEditar = ref<boolean>(false);
+
+		var dataPerson: Form = {
+			_id: 'xxx',
+			nome: '',
+			email: ''
+		};
+
+		const openModalEditar = (item: any) => {
+			dataPerson = {
+				_id: item._id,
+				nome: item.nome,
+				email: item.email
+			};
+			visibleModalEditar.value = true;
+		};
+
+		const closeModalEditar = () => {
+			visibleModalEditar.value = false;
+		};
+
 		const columns = {
 			nome: 'Nome',
 			email: 'E-mail',
-			excluir: 'Excluir'
+			excluir: 'Excluir',
+			editar: 'Editar'
 		};
 
 		const listPerson = ref<Form[]>([]);
@@ -94,7 +118,11 @@ export default {
 			listPerson,
 			addPersonList,
 			deletePerson,
-			submitForm
+			submitForm,
+			openModalEditar,
+			closeModalEditar,
+			visibleModalEditar,
+			dataPerson
 		};
 	}
 };
@@ -127,7 +155,8 @@ export default {
 				</div>
 			</form>
 			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" :addPersonList="addPersonList" />
-			<TableComponent :itens="listPerson" :columns="columns" :deletePerson="deletePerson" />
+			<ModalEditarPessoa :visible="visibleModalEditar" @close-modal="closeModalEditar" :closeModalEditar="closeModalEditar" :dataPerson="dataPerson" />
+			<TableComponent :itens="listPerson" :columns="columns" :deletePerson="deletePerson" :openModalEditar="openModalEditar" />
 		</div>
 	</div>
 </template>

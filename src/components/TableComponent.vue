@@ -15,6 +15,9 @@ export default {
 		},
 		deletePerson: {
 			type: Function as PropType<any>
+		},
+		openModalEditar: {
+			type: Function as PropType<any>
 		}
 	}
 };
@@ -27,7 +30,8 @@ export default {
 				<tr>
 					<th>{{ columns.nome }}</th>
 					<th>{{ columns.email }}</th>
-					<th class="table-button-delete">{{ columns.excluir }}</th>
+					<th>{{ columns.excluir }}</th>
+					<th>{{ columns.editar }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,6 +41,11 @@ export default {
 					<td class="table-button-delete">
 						<button @click="deletePerson(item._id)" class="button-delete">
 							<img src="../assets/lixo.png" width="20" height="16" alt="Descrição da imagem" />
+						</button>
+					</td>
+					<td class="table-update-delete">
+						<button @click="openModalEditar(item)" class="button-delete">
+							<img src="../assets/pencil.png" width="18" height="16" alt="Descrição da imagem" />
 						</button>
 					</td>
 				</tr>
@@ -71,11 +80,6 @@ th {
 .button-delete {
 	border: none;
 	background-color: #f2f2f2;
-}
-
-.table-button-delete {
-	display: flex;
-	justify-content: center;
-	/* width: 60px; */
+	width: 100%;
 }
 </style>
