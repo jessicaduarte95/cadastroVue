@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PropType } from 'vue';
+import { PropType, onUpdated } from 'vue';
 import ModalComponent from '../../../components/ModalComponent.vue';
 import ButtonComponent from '../../../components/ButtonComponent.vue';
 import axios from 'axios';
@@ -33,9 +33,9 @@ export default {
 		};
 
 		const form = ref<Form>({
-			_id: props.dataPerson._id,
-			nome: props.dataPerson.nome,
-			email: props.dataPerson.email
+			_id: null,
+			nome: '',
+			email: ''
 		});
 
 		const rules = {
@@ -45,6 +45,13 @@ export default {
 		};
 
 		const formV$ = useVuelidate(rules, form);
+
+		onUpdated(() => {
+			form.value._id = props.dataPerson._id;
+			form.value.nome = props.dataPerson.nome;
+			form.value.email = props.dataPerson.email;
+		});
+
 		const submitFormUpdate = async (event: Event) => {
 			event.preventDefault();
 			console.log('Data Person', props.dataPerson);

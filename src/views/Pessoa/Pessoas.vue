@@ -61,6 +61,9 @@ export default {
 		};
 
 		const closeModalEditar = () => {
+			dataPerson._id = '';
+			dataPerson.nome = '';
+			dataPerson.email = '';
 			visibleModalEditar.value = false;
 		};
 
