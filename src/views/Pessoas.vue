@@ -46,12 +46,11 @@ const columns = {
 let listPerson = ref<Form[]>([]);
 
 const deletePerson = async (id: number) => {
-	console.log('delete', id);
 	await axios
 		.delete<Form[]>(`http://localhost:5000/api/pessoa/${id}`)
 		.then(response => {
-			// listPerson.value = response.data;
-			// console.log('Dados', response.data);
+			const filteredList = listPerson.value.filter(e => e._id !== id);
+			listPerson.value = filteredList;
 		})
 		.catch(error => {
 			console.log('Teste', error);
@@ -69,7 +68,6 @@ const submitForm = async (event: Event) => {
 		})
 		.then(response => {
 			listPerson.value = response.data;
-			console.log('Dados', response.data);
 		})
 		.catch(error => {
 			console.log('Teste', error);
