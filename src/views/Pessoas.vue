@@ -4,23 +4,23 @@ import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import axios from 'axios';
 import ButtonComponent from '../components/ButtonComponent.vue';
-import InputComponent from '../components/InputComponent.vue';
+import TableComponent from '../components/TableComponent.vue';
 import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
 
 type Form = {
-	id: number | null;
+	_id: number | null;
 	nome: string;
 	email: string;
 };
 
 const form = ref<Form>({
-	id: null,
+	_id: null,
 	nome: '',
 	email: ''
 });
 
 const rules = {
-	id: {},
+	_id: {},
 	nome: {},
 	email: {}
 };
@@ -37,17 +37,20 @@ const closeModalCadastro = () => {
 
 let v$ = useVuelidate(rules, form);
 
+let listPerson = ref<Form[]>([]);
+
 const submitForm = async (event: Event) => {
 	event.preventDefault();
 	await axios
-		.get<Form>('http://localhost:5000/api/pessoa', {
+		.get<Form[]>('http://localhost:5000/api/pessoa', {
 			params: {
 				nome: form.value.nome,
 				email: form.value.email
 			}
 		})
 		.then(response => {
-			console.log('Dados', response.data);
+			listPerson.value = response.data;
+			console.log('Dados', listPerson.value);
 		})
 		.catch(error => {
 			console.log('Teste', error);
@@ -81,7 +84,8 @@ const submitForm = async (event: Event) => {
 					</div>
 				</div>
 			</form>
-			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro"/>
+			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" />
+			<TableComponent :itens="listPerson.value" />
 		</div>
 	</div>
 </template>
@@ -119,7 +123,8 @@ const submitForm = async (event: Event) => {
 
 #container {
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 	height: 100%;
 	width: 100%;
 	background-color: #f7f7f7;
