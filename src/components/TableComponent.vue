@@ -12,6 +12,9 @@ export default {
 				email: string;
 				excluir: string;
 			}>
+		},
+		deletePerson: {
+			type: Function as PropType<any>
 		}
 	}
 };
@@ -31,7 +34,9 @@ export default {
 				<tr v-for="item in itens" :key="item._id">
 					<td>{{ item.nome }}</td>
 					<td>{{ item.email }}</td>
-					<td>Excluir</td>
+					<td>
+						<button @click="deletePerson(item._id)">Excluir</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
