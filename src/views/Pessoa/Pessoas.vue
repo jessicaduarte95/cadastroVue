@@ -213,6 +213,11 @@ export default {
 	border-radius: 4px;
 }
 
+.input:focus {
+	outline: 0.5px solid #4791db;
+	border-color: #4791db;
+}
+
 .containerButton {
 	display: flex;
 	justify-content: flex-end;
