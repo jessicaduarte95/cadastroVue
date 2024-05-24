@@ -1,33 +1,36 @@
-<script setup lang="ts">
-import { defineProps } from 'vue';
-
-type TabProps = {
-	itens?: any;
+<script lang="ts">
+import { PropType } from 'vue';
+export default {
+	name: 'TableComponent',
+	props: {
+		itens: {
+			type: Array as PropType<any[]>
+		},
+		columns: {
+			type: Object as PropType<{
+				nome: string;
+				email: string;
+				excluir: string;
+			}>
+		}
+	}
 };
-
-const props = defineProps<TabProps>();
-
 </script>
 
 <template>
 	<div class="table">
-		<table>
+		<table v-if="itens && itens.length">
 			<thead>
 				<tr>
-					<th>Nome</th>
-					<th>Email</th>
-					<th>Excluir</th>
+					<th>{{ columns.nome }}</th>
+					<th>{{ columns.email }}</th>
+					<th>{{ columns.excluir }}</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>João</td>
-					<td>30</td>
-					<td>Excluir</td>
-				</tr>
-				<tr>
-					<td>Maria</td>
-					<td>25</td>
+				<tr v-for="item in itens" :key="item._id">
+					<td>{{ item.nome }}</td>
+					<td>{{ item.email }}</td>
 					<td>Excluir</td>
 				</tr>
 			</tbody>

@@ -37,6 +37,12 @@ const closeModalCadastro = () => {
 
 let v$ = useVuelidate(rules, form);
 
+const columns = {
+	nome: 'Nome',
+	email: 'E-mail',
+	excluir: 'Excluir'
+};
+
 let listPerson = ref<Form[]>([]);
 
 const submitForm = async (event: Event) => {
@@ -50,7 +56,7 @@ const submitForm = async (event: Event) => {
 		})
 		.then(response => {
 			listPerson.value = response.data;
-			console.log('Dados', listPerson.value);
+			console.log('Dados', response.data);
 		})
 		.catch(error => {
 			console.log('Teste', error);
@@ -85,7 +91,7 @@ const submitForm = async (event: Event) => {
 				</div>
 			</form>
 			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" />
-			<TableComponent :itens="listPerson.value" />
+			<TableComponent :itens="listPerson" :columns="columns" />
 		</div>
 	</div>
 </template>
