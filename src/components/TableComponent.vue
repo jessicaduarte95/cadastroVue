@@ -27,15 +27,17 @@ export default {
 				<tr>
 					<th>{{ columns.nome }}</th>
 					<th>{{ columns.email }}</th>
-					<th>{{ columns.excluir }}</th>
+					<th class="table-button-delete">{{ columns.excluir }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="item in itens" :key="item._id">
 					<td>{{ item.nome }}</td>
 					<td>{{ item.email }}</td>
-					<td>
-						<button @click="deletePerson(item._id)">Excluir</button>
+					<td class="table-button-delete">
+						<button @click="deletePerson(item._id)" class="button-delete">
+							<img src="../assets/lixo.png" width="20" height="16" alt="Descrição da imagem" />
+						</button>
 					</td>
 				</tr>
 			</tbody>
@@ -64,5 +66,16 @@ td {
 th {
 	background-color: #f2f2f2;
 	font-weight: bold;
+}
+
+.button-delete {
+	border: none;
+	background-color: #f2f2f2;
+}
+
+.table-button-delete {
+	display: flex;
+	justify-content: center;
+	width: 60px;
 }
 </style>
