@@ -48,17 +48,15 @@ export default {
 		const visibleModalEditar = ref<boolean>(false);
 
 		var dataPerson: Form = {
-			_id: 'xxx',
+			_id: '',
 			nome: '',
 			email: ''
 		};
 
 		const openModalEditar = (item: any) => {
-			dataPerson = {
-				_id: item._id,
-				nome: item.nome,
-				email: item.email
-			};
+			dataPerson._id = item._id;
+			dataPerson.nome = item.nome;
+			dataPerson.email = item.email;
 			visibleModalEditar.value = true;
 		};
 

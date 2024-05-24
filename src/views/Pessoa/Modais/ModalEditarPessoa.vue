@@ -33,7 +33,7 @@ export default {
 		};
 
 		const form = ref<Form>({
-			_id: props.dataPerson.email_id,
+			_id: props.dataPerson._id,
 			nome: props.dataPerson.nome,
 			email: props.dataPerson.email
 		});
