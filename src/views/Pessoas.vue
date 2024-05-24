@@ -8,7 +8,7 @@ import TableComponent from '../components/TableComponent.vue';
 import ModalCadastrarPessoa from './ModalCadastrarPessoa.vue';
 
 type Form = {
-	_id: number | null;
+	_id: any;
 	nome: string;
 	email: string;
 };
@@ -44,6 +44,10 @@ const columns = {
 };
 
 let listPerson = ref<Form[]>([]);
+
+const addPersonList = (data: any) => {
+	listPerson.value.push(data);
+};
 
 const deletePerson = async (id: number) => {
 	await axios
@@ -101,7 +105,7 @@ const submitForm = async (event: Event) => {
 					</div>
 				</div>
 			</form>
-			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" />
+			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" :addPersonList="addPersonList" />
 			<TableComponent :itens="listPerson" :columns="columns" :deletePerson="deletePerson" />
 		</div>
 	</div>

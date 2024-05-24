@@ -76,6 +76,6 @@ th {
 .table-button-delete {
 	display: flex;
 	justify-content: center;
-	width: 60px;
+	/* width: 60px; */
 }
 </style>

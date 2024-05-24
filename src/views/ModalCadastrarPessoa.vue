@@ -10,6 +10,7 @@ import useVuelidate from '@vuelidate/core';
 type TabProps = {
 	visible?: boolean;
 	closeModalCadastro: () => void;
+	addPersonList: any;
 };
 
 const props = defineProps<TabProps>();
@@ -48,7 +49,7 @@ const submitForm = async (event: Event) => {
 				email: form.value.email
 			})
 			.then(response => {
-				console.log('Teste', response.data);
+				props.addPersonList(response.data);
 			})
 			.catch(error => {
 				console.log('Teste', error);
