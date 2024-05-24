@@ -108,7 +108,7 @@ export default {
 			</div>
 		</div>
 		<div id="container">
-			<form @submit="submitForm">
+			<form id="submitForm" @submit="submitForm">
 				<div class="search">
 					<div class="containerInput">
 						<div class="inputFields">

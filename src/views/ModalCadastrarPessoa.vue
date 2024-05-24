@@ -84,7 +84,7 @@ export default {
 <template>
 	<div v-if="visible">
 		<ModalComponent>
-			<form @submit="submitFormRegister">
+			<form id="submitFormRegister" @submit="submitFormRegister">
 				<div class="modal-container">
 					<div>
 						<h2>Cadastrar Pessoa</h2>
@@ -122,28 +122,6 @@ export default {
 	flex-direction: column;
 	width: 100%;
 	gap: 0.8rem;
-}
-
-.inputFields {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
-.label {
-	display: flex;
-}
-
-.input {
-	margin-top: 0.5rem;
-	padding: 0.5rem;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-.input:focus {
-	outline: 0.5px solid #4791db;
-	border-color: #4791db;
 }
 
 .button {
