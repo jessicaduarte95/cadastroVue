@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, onUpdated } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import axios from 'axios';
 import ButtonComponent from '../../components/ButtonComponent.vue';
@@ -48,7 +48,7 @@ export default {
 		const visibleModalEditar = ref<boolean>(false);
 
 		var dataPerson: Form = {
-			_id: '',
+			_id: null,
 			nome: '',
 			email: ''
 		};
@@ -61,11 +61,17 @@ export default {
 		};
 
 		const closeModalEditar = () => {
-			dataPerson._id = '';
+			dataPerson._id = null;
 			dataPerson.nome = '';
 			dataPerson.email = '';
 			visibleModalEditar.value = false;
 		};
+
+		onUpdated(() => {
+			dataPerson._id;
+			dataPerson.nome;
+			dataPerson.email;
+		});
 
 		const columns = {
 			nome: 'Nome',

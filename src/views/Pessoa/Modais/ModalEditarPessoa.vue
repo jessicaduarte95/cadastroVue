@@ -47,16 +47,25 @@ export default {
 		const formV$ = useVuelidate(rules, form);
 
 		onUpdated(() => {
-			form.value._id = props.dataPerson._id;
-			form.value.nome = props.dataPerson.nome;
-			form.value.email = props.dataPerson.email;
+			if (form.value.nome == '' && form.value.email == '') {
+				form.value._id = props.dataPerson._id;
+				form.value.nome = props.dataPerson.nome;
+				form.value.email = props.dataPerson.email;
+			}
 		});
+
+		const handleClick = () => {
+			form.value._id = null;
+			form.value.nome = '';
+			form.value.email = '';
+            props.closeModalEditar();
+		};
 
 		const submitFormUpdate = async (event: Event) => {
 			event.preventDefault();
 			console.log('Data Person', props.dataPerson);
 			const result = await formV$.value.$validate();
-			const id = props.dataPerson.email_id;
+			const id = form.value._id;
 			if (result) {
 				await axios
 					.put<Form>(`http://localhost:5000/api/pessoa/${id}`, {
@@ -70,9 +79,10 @@ export default {
 						console.log('Teste', error);
 					})
 					.finally(() => {
+						form.value._id == null;
 						form.value.nome = '';
 						form.value.email = '';
-						props.closeModalCadastro();
+						props.closeModalEditar();
 					});
 			}
 		};
@@ -80,7 +90,8 @@ export default {
 		return {
 			formV$,
 			form,
-			submitFormUpdate
+			submitFormUpdate,
+			handleClick
 		};
 	}
 };
@@ -93,7 +104,7 @@ export default {
 				<div class="modal-container">
 					<div>
 						<h2>Editar Dados</h2>
-						<button class="close-button" @click="$emit('close-modal')">x</button>
+						<button class="close-button" @click="handleClick">x</button>
 					</div>
 					<div class="containerInputRegister">
 						<div class="inputFields">
