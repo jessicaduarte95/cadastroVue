@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { required, email } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
+import Vue from 'vue';
 
 export default {
 	name: 'ModalEditarPessoa',
@@ -83,6 +84,11 @@ export default {
 					})
 					.then(response => {
 						props.updatePersonList(response.data);
+						Vue.notify({
+							group: 'success',
+							title: 'Sucesso',
+							text: 'Ação realizada com sucesso!'
+						});
 					})
 					.catch(error => {
 						console.log('Erro:', error);

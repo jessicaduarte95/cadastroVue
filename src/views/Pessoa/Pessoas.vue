@@ -6,6 +6,7 @@ import ButtonComponent from '../../components/ButtonComponent.vue';
 import TableComponent from '../../components/TableComponent.vue';
 import ModalCadastrarPessoa from './Modais/ModalCadastrarPessoa.vue';
 import ModalEditarPessoa from './Modais/ModalEditarPessoa.vue';
+import Vue from 'vue';
 
 export default {
 	name: 'Pessoas',
@@ -90,6 +91,11 @@ export default {
 				.then(response => {
 					const filteredList = listPerson.value.filter(e => e._id !== id);
 					listPerson.value = filteredList;
+					Vue.notify({
+						group: 'success',
+						title: 'Sucesso',
+						text: 'Ação realizada com sucesso!'
+					});
 				})
 				.catch(error => {
 					console.log('Teste', error);
@@ -151,6 +157,7 @@ export default {
 		<div id="container">
 			<form id="submitForm" @submit="submitForm">
 				<div class="search">
+					<notifications group="success" position="bottom right" class="notification"/>
 					<div class="containerInput">
 						<div class="inputFields">
 							<label class="label">Nome</label>
@@ -190,6 +197,10 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+.notification {
+	margin: 1rem;
 }
 
 .headerContainer {
