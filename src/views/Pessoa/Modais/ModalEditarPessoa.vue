@@ -63,7 +63,6 @@ export default {
 
 		const submitFormUpdate = async (event: Event) => {
 			event.preventDefault();
-			console.log('Data Person', props.dataPerson);
 			const result = await formV$.value.$validate();
 			const id = form.value._id;
 			if (result) {
