@@ -91,7 +91,7 @@ export default {
 						});
 					})
 					.catch(error => {
-						console.log('Erro:', error);
+						console.log('Erro: ', error);
 					})
 					.finally(() => {
 						closeModalEditar();

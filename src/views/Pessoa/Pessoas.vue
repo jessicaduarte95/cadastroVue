@@ -98,7 +98,7 @@ export default {
 					});
 				})
 				.catch(error => {
-					console.log('Teste', error);
+					console.log('Erro: ', error);
 				});
 		};
 
