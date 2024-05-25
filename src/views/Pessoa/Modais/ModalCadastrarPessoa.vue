@@ -52,8 +52,8 @@ export default {
 		const closeModalCadastro = () => {
 			errorNome.value = false;
 			errorEmail.value = false;
-            props.closeModalCadastro();
-        };
+			props.closeModalCadastro();
+		};
 
 		const submitFormRegister = async (event: Event) => {
 			event.preventDefault();
@@ -89,6 +89,7 @@ export default {
 
 		onUpdated(() => {
 			errorNome;
+			errorEmail;
 		});
 
 		return {
@@ -132,41 +133,4 @@ export default {
 	</div>
 </template>
 
-<style>
-.modal-container {
-	width: 25rem;
-	@media (max-width: 600px) {
-		width: 15rem;
-	}
-}
-
-.containerInputRegister {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	gap: 0.8rem;
-}
-
-.error {
-	display: flex;
-	color: red;
-	font-size: 0.8rem;
-	font-weight: 200;
-	margin-top: 0.4rem;
-}
-
-.button {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 0.7rem;
-}
-.close-button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	background: transparent;
-	border: none;
-	font-size: 20px;
-	cursor: pointer;
-}
-</style>
+<style></style>

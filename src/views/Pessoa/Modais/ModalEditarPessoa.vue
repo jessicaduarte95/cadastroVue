@@ -49,18 +49,25 @@ export default {
 
 		const formV$ = useVuelidate(rules, form);
 
+		const errorNome = ref(false);
+		const errorEmail = ref(false);
+
 		onUpdated(() => {
 			if (form.value.nome == '' && form.value.email == '') {
 				form.value._id = props.dataPerson._id;
 				form.value.nome = props.dataPerson.nome;
 				form.value.email = props.dataPerson.email;
 			}
+			errorNome;
+			errorEmail;
 		});
 
-		const handleClick = () => {
+		const closeModalEditar = () => {
 			form.value._id = null;
 			form.value.nome = '';
 			form.value.email = '';
+			errorNome.value = false;
+			errorEmail.value = false;
 			props.closeModalEditar();
 		};
 
@@ -78,14 +85,18 @@ export default {
 						props.updatePersonList(response.data);
 					})
 					.catch(error => {
-						console.log('Teste', error);
+						console.log('Erro:', error);
 					})
 					.finally(() => {
-						form.value._id == null;
-						form.value.nome = '';
-						form.value.email = '';
-						props.closeModalEditar();
+						closeModalEditar();
 					});
+			} else {
+				if (formV$.value.$errors[0].$property == 'nome') {
+					errorNome.value = true;
+				}
+				if (formV$.value.$errors[0].$property == 'email' || formV$.value.$errors[1]?.$property == 'email') {
+					errorEmail.value = true;
+				}
 			}
 		};
 
@@ -93,7 +104,9 @@ export default {
 			formV$,
 			form,
 			submitFormUpdate,
-			handleClick
+			closeModalEditar,
+			errorNome,
+			errorEmail
 		};
 	}
 };
@@ -106,16 +119,18 @@ export default {
 				<div class="modal-container">
 					<div>
 						<h2>Editar Dados</h2>
-						<button class="close-button" @click="handleClick">x</button>
+						<button class="close-button" @click="closeModalEditar">x</button>
 					</div>
 					<div class="containerInputRegister">
 						<div class="inputFields">
 							<label class="label">Nome</label>
 							<input class="input" placeholder="Digite aqui" v-model="form.nome" type="text" />
+							<span v-if="errorNome && form.nome.length == 0" class="error">Campo obrigatório!</span>
 						</div>
 						<div class="inputFields">
 							<label class="label">Email</label>
 							<input class="input" placeholder="Digite aqui" v-model="form.email" type="email" />
+							<span v-if="errorEmail && form.email.length == 0" class="error">Campo obrigatório!</span>
 						</div>
 					</div>
 					<div class="button">
