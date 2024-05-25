@@ -19,6 +19,9 @@ export default {
 		},
 		dataPerson: {
 			type: Object as PropType<any>
+		},
+		updatePersonList: {
+			type: Function as PropType<any>
 		}
 	},
 	components: {
@@ -58,7 +61,7 @@ export default {
 			form.value._id = null;
 			form.value.nome = '';
 			form.value.email = '';
-            props.closeModalEditar();
+			props.closeModalEditar();
 		};
 
 		const submitFormUpdate = async (event: Event) => {
@@ -72,7 +75,7 @@ export default {
 						email: form.value.email
 					})
 					.then(response => {
-						console.log('Dados alterados: ', response.data);
+						props.updatePersonList(response.data);
 					})
 					.catch(error => {
 						console.log('Teste', error);

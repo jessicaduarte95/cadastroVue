@@ -67,12 +67,6 @@ export default {
 			visibleModalEditar.value = false;
 		};
 
-		onUpdated(() => {
-			dataPerson._id;
-			dataPerson.nome;
-			dataPerson.email;
-		});
-
 		const columns = {
 			nome: 'Nome',
 			email: 'E-mail',
@@ -84,6 +78,10 @@ export default {
 
 		const addPersonList = (data: any) => {
 			listPerson.value.push(data);
+		};
+
+		const updatePersonList = (data: any) => {
+			listPerson.value = data;
 		};
 
 		const deletePerson = async (id: number) => {
@@ -115,6 +113,13 @@ export default {
 				});
 		};
 
+		onUpdated(() => {
+			dataPerson._id;
+			dataPerson.nome;
+			dataPerson.email;
+			listPerson;
+		});
+
 		return {
 			v$,
 			form,
@@ -129,7 +134,8 @@ export default {
 			openModalEditar,
 			closeModalEditar,
 			visibleModalEditar,
-			dataPerson
+			dataPerson,
+			updatePersonList
 		};
 	}
 };
@@ -162,7 +168,7 @@ export default {
 				</div>
 			</form>
 			<ModalCadastrarPessoa :visible="visibleModalCadastro" @close-modal="closeModalCadastro" :closeModalCadastro="closeModalCadastro" :addPersonList="addPersonList" />
-			<ModalEditarPessoa :visible="visibleModalEditar" @close-modal="closeModalEditar" :closeModalEditar="closeModalEditar" :dataPerson="dataPerson" />
+			<ModalEditarPessoa :visible="visibleModalEditar" :updatePersonList="updatePersonList" @close-modal="closeModalEditar" :closeModalEditar="closeModalEditar" :dataPerson="dataPerson" />
 			<TableComponent :itens="listPerson" :columns="columns" :deletePerson="deletePerson" :openModalEditar="openModalEditar" />
 		</div>
 	</div>
