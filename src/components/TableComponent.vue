@@ -59,6 +59,7 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	margin-top: 2.5rem;
+	margin-bottom: 2.5rem;
 	width: 35rem;
 	@media (max-width: 600px) {
 		width: 17rem;
