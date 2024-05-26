@@ -42,3 +42,21 @@
 <div display="flex" align="center">
   <img src="/src/assets/projectImg/img3.png">
 </div>
+
+<p>Os campos da modal de cadastro são obrigatórios: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img4.png">
+</div>
+
+<p>Modal de edição: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img5.png">
+</div>
+
+<p>Ao realizar uma ação (adicionar, editar ou excluir) uma notifição aparecerá: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img6.png">
+</div>
