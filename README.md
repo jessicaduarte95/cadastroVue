@@ -31,6 +31,8 @@
   <img src="/src/assets/projectImg/img1.png">
 </div>
 
+<p>Os dados serão carregados ao clicar no botão pesquisar, podendo utilizar os filtros para encontrar pessoas específicas: </p>
+
 <div display="flex" align="center">
   <img src="/src/assets/projectImg/img2.png">
 </div>
