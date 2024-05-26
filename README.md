@@ -1,24 +1,36 @@
-# app
+<h1 align="center"> Aplicação de cadastro de Pessoas </h1>
+<p> O objetivo da aplicação é cadastrar pessoas, incluindo informações como nome e e-mail.</p>
 
-## Project setup
-```
-npm install
-```
+<h2 align="center"> Tecnologias Usadas</h2>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Typescript;
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Vue(v2.7);
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Vuetify;;
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Node  (v20.11.1);
+
+<h2 align="center">  Siga os seguintes passos para rodar o projeto </h2>
+
+- Clone o projeto;
+
+- Instale as dependências: npm install;
+
+- Rode o projeto: npm run serve;
+
+- <p> <strong>Backend disponível no link: https://github.com/jessicaduarte95/serverCadastroPessoas. </strong> </p>
+
+<h2 align="center"> Apresentação do projeto </h2>
+
+### Funcionalidades
+
+<p>Página inicial: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/foto1.png">
+</div>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/foto2.png">
+</div>
