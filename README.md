@@ -1,24 +1,62 @@
-# app
+<h1 align="center"> Aplicação de cadastro de Pessoas </h1>
+<p> O objetivo da aplicação é cadastrar pessoas, incluindo informações como nome e e-mail.</p>
 
-## Project setup
-```
-npm install
-```
+<h2 align="center"> Tecnologias Usadas</h2>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Typescript;
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Vue(v2.7);
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Vuetify;
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Node  (v20.11.1);
+
+<h2 align="center">  Siga os seguintes passos para rodar o projeto </h2>
+
+- Clone o projeto;
+
+- Instale as dependências: npm install;
+
+- Rode o projeto: npm run serve;
+
+- <p> <strong>Backend disponível no link: https://github.com/jessicaduarte95/serverCadastroPessoas. </strong> </p>
+
+<h2 align="center"> Apresentação do projeto </h2>
+
+### Funcionalidades
+
+<p>Página inicial: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img1.png">
+</div>
+
+<p>Os dados serão carregados ao clicar no botão pesquisar, podendo utilizar os filtros para encontrar pessoas específicas: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img2.png">
+</div>
+
+<p>Modal de cadastro: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img3.png">
+</div>
+
+<p>Os campos da modal de cadastro são obrigatórios: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img4.png">
+</div>
+
+<p>Modal de edição: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img5.png">
+</div>
+
+<p>Ao realizar uma ação (adicionar, editar ou excluir) uma notifição aparecerá: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img6.png">
+</div>
