@@ -164,7 +164,7 @@ export default {
 							<input class="input" placeholder="Digite aqui" v-model="form.nome" />
 						</div>
 						<div class="inputFields">
-							<label class="label">Email</label>
+							<label class="label">E-mail</label>
 							<input class="input" placeholder="Digite aqui" v-model="form.email" />
 						</div>
 					</div>

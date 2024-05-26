@@ -62,7 +62,7 @@ table {
 	margin-bottom: 2.5rem;
 	width: 35rem;
 	@media (max-width: 600px) {
-		width: 17rem;
+		width: 14rem;
 	}
 }
 
@@ -71,6 +71,9 @@ td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: left;
+	@media (max-width: 600px) {
+		padding: 4px;
+	}
 }
 
 th {

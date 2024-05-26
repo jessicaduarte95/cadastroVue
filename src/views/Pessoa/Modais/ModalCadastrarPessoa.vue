@@ -125,7 +125,7 @@ export default {
 							<span v-if="errorNome && form.nome.length == 0" class="error">Campo obrigatório!</span>
 						</div>
 						<div class="inputFields">
-							<label class="label">Email</label>
+							<label class="label">E-mail</label>
 							<input class="input" placeholder="Digite aqui" v-model="form.email" type="email" />
 							<span v-if="errorEmail && form.email.length == 0" class="error">Campo obrigatório!</span>
 						</div>
