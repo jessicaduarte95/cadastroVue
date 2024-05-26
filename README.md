@@ -7,7 +7,7 @@
 
 - Vue(v2.7);
 
-- Vuetify;;
+- Vuetify;
 
 - Node  (v20.11.1);
 
@@ -28,9 +28,15 @@
 <p>Página inicial: </p>
 
 <div display="flex" align="center">
-  <img src="/src/assets/projectImg/foto1.png">
+  <img src="/src/assets/projectImg/img1.png">
 </div>
 
 <div display="flex" align="center">
-  <img src="/src/assets/projectImg/foto2.png">
+  <img src="/src/assets/projectImg/img2.png">
+</div>
+
+<p>Modal de cadastro: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img3.png">
 </div>
