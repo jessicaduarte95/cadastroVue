@@ -60,3 +60,10 @@
 <div display="flex" align="center">
   <img src="/src/assets/projectImg/img6.png">
 </div>
+
+<p>Responsividade da aplicação: </p>
+
+<div display="flex" align="center">
+  <img src="/src/assets/projectImg/img7.png">
+  <img src="/src/assets/projectImg/img8.png">
+</div>
